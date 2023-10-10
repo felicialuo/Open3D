@@ -321,6 +321,9 @@ class ReconstructionWindow:
     # Major loop
     def update_main(self):
         depth_file_names, color_file_names = load_rgbd_file_names(self.config)
+        print("self.config", self.config)
+        print("depth_file_names", depth_file_names)
+        print("color_file_names", color_file_names)
         intrinsic = load_intrinsic(self.config)
 
         n_files = len(color_file_names)
