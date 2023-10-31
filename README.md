@@ -1,3 +1,67 @@
+# Real-time 3D Reconstruction via RGB-D Camera
+This is my implementation of real-time 3D reconstruction using Intel RealSense D435i RGB-D camera, following this [official tutorial](http://www.open3d.org/docs/latest/tutorial/t_reconstruction_system/index.html).
+
+## Set up Environment
+```bash
+conda create --name open3d
+conda activate open3d
+conda install pip
+pip install open3d
+pip install pyrealsense2
+pip install opencv-python
+```
+
+## Capture Your Own Dataset
+Tips for capturing:
+- Capture scene with feature, not plain wall
+- Capture as holistic space as possible, and walk toward further for accuracy
+  
+Follow [Capture your own dataset tutorial](http://www.open3d.org/docs/latest/tutorial/reconstruction_system/capture_your_own_dataset.html#capture-your-own-dataset)
+- Change directory to: Open3D\examples\python\reconstruction_system\sensors
+- Output in: Open3D\examples\python\reconstruction_system\dataset
+- run: `python realsense_recorder.py --record_imgs`
+- Move `\reconstruction_system\dataset` to `\t_reconstruction_system`
+- Change directory to `Open3D\examples\python\t_reconstruction_system`
+- Create a new FL_config.yml
+    - copy defaul_config.yml
+    - modify:
+     ```
+     path_dataset: dataset
+     path_intrinsic: FL_camera_intrinsic.json
+     ```
+Alternatively, you can record from RealSense Viewer and save a bag file
+- then in FL_config.yml, modify: `path_dataset: 20231010_011717.bag # only if recorded with realsense viewer`
+
+Make sure the directory structure is as follow
+```
+t_reconstruction_system
+	-> dense_slam_gui.py # to run
+	-> FL_camera_intrisic.python
+	-> FL_config.yml
+	-> dataset
+		-> color
+		-> depth
+	-> 20231010_011717.bag # only if recorded with realsense viewer
+# will be created
+	-> output.log
+	-> output.npz
+	-> output.ply
+```
+
+## Run reconstruction
+Follow [reconstruction tutorial](http://www.open3d.org/docs/latest/tutorial/t_reconstruction_system/index.html)
+```
+python dense_slam_gui.py --device "CUDA:0" --config FL_config.yml
+```
+
+## Result
+<img width="500" alt="office_real-sense_2" src="https://github.com/felicialuo/Open3D/assets/129685045/29c0371d-ba3e-4e73-a5a2-2e159bdbc37d">
+<img width="500" alt="office_real-sense" src="https://github.com/felicialuo/Open3D/assets/129685045/7d79f032-ee64-40d0-9810-09cc99b3d7e8">  
+
+**-- END of my implementation--**
+ 
+
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/isl-org/Open3D/master/docs/_static/open3d_logo_horizontal.png" width="320" />
 </p>
