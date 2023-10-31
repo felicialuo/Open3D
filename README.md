@@ -2,6 +2,7 @@
 This is my implementation of real-time 3D reconstruction using Intel RealSense D435i RGB-D camera, following this [official tutorial](http://www.open3d.org/docs/latest/tutorial/t_reconstruction_system/index.html).
 
 ## Set up Environment
+Tested on Windows 10, with AMD® Ryzen 9 7900x & NVIDIA GeForce RTX 3090 Ti.
 ```bash
 conda create --name open3d
 conda activate open3d
